@@ -4,22 +4,26 @@ const socketIo=require('socket.io')
 const http=require('http')
 const mongoose=require('mongoose');
 const { Socket } = require('engine.io');
+const ConnectDB=require('./util/db.js');
+const cors=require('cors');
+const UserAuthRouter=require('./routes/userAuthRouter.js')
+const UserModel=require('./models/userModel.js')
+const ConversationModel=require('./models/conversationModel.js')
+const MessageModel=require('./models/messageModel.js')
+const MessageRoutes=require('./routes/messageRoutes.js')
+const ConversationRoutes=require('./routes/conversationRoutes.js')
+
+ConnectDB();
+app.use(express.json());
+app.use(cors())
+
+const port=process.env.PORT||5000;
+
+ app.use('/user',UserAuthRouter)
+ app.use('/message',MessageRoutes)
+ app.use('/conversation',ConversationRoutes)
 
 
-const server=http.createServer();
-const io=socketIo({server})
-
-io.on('connection',(socket)=>{
-    console.log('A user connected');
-    socket.on('disconnected',()=>{
-        console.log('A user disconnected'); 
-    })
-})
-
-app.use('/',(re,res)=>{
-    res.send('<h1>Hii</h1>');
-})
-
-app.listen('3000',()=>{
-    console.log('server 3000 is runnning....')
+app.listen(port,()=>{
+    console.log(`server ${port} is runnning....`)
 })
