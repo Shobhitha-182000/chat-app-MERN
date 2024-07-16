@@ -5,6 +5,10 @@ const bcrypt = require('bcrypt');
 exports.signupPage = async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        console.log(req.body);
+        if (!password) {
+            return res.status(400).json({ message: 'Password is required' });
+        }
         // const profilePic = req.file;
         const profilePic = 'https://avatar.iran.liara.run/public/4';
 
@@ -12,7 +16,7 @@ exports.signupPage = async (req, res) => {
         if (oldUser) {
             return res.status(409).json({ message: 'User already exists' });
         }
-
+        console.log('..............' + oldUser);
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -32,14 +36,17 @@ exports.signupPage = async (req, res) => {
     }
 };
 
+
 exports.loginPage = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log(req.body);
 
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
+      
 
         const existPassword = await bcrypt.compare(password, user.password);
         if (!existPassword) {
@@ -49,7 +56,8 @@ exports.loginPage = async (req, res) => {
         generateTokenAndSetCookies(user._id, res);
         return res.status(200).json({ data: user, message: 'Successfully logged in' });
     } catch (err) {
-        console.error('Login error', err);
+        
+        console.log('Login error', err);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
