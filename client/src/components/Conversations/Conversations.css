@@ -1,0 +1,7 @@
+.Conversations-container{
+    padding-top: 0.5rem /* 8px */;
+    padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}

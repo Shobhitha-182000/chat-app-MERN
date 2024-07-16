@@ -1,0 +1,11 @@
+.sidebar-container{
+    border-right-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(100 116 139 / var(--tw-border-opacity)) ;
+    display: flex;
+    flex-direction: column;
+    background-color: #2d3748;
+    width: 280px;
+    margin-left: 100px;
+    
+}

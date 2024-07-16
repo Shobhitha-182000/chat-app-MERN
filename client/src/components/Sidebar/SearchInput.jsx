@@ -7,9 +7,9 @@ const SearchInput = () => {
 <input
   type="text"
   placeholder="Type here"
-  className="input input-bordered input-success w-full max-w-xs" />
-  <button type='submit' className='btn btn-circle bg-sky-300 text-white'>
-				<IoSearchSharp className='w-6 h-6 outline-none' />
+  className="input input-bordered input-success w-full max-w-fit" />
+  <button type='submit' className='btn btn-circle bg-sky-300 text-white w-11 '>
+				<IoSearchSharp className='w-4 h-4 outline-none' />
 			</button>
     </div>
   )
