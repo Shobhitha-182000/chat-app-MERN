@@ -1,15 +1,17 @@
 const User = require("../models/userModel");
+ 
 
-exports.getUserBySideBar=async(req,res)=>{
-    try{
-        const logedUserId=req.user._id;
-        
-    const filterUser=await User.find({_id:{$ne:logedUserId}}).select("-password")
+exports.getUsersForSidebar = async (req, res) => {
+	try {
+		const loggedInUserId = req.user._id;
 
-    res.status(200).json(filterUser)
+		const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
 
-    }catch (error) {
-        console.log(error);
-        res.status(500).json("Internal server error in get user");
-      }
-}
+		res.status(200).json(filteredUsers);
+	} catch (error) {
+		console.error("Error in getUsersForSidebar: ", error.message);
+		res.status(500).json({ error: "Internal server error" });
+	}
+};
+ 
+  

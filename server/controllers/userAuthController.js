@@ -54,6 +54,8 @@ exports.loginPage = async (req, res) => {
         }
 
         generateTokenAndSetCookies(user._id, res);
+        console.log('Response cookies:', res.getHeaders()['set-cookie']);
+        
         return res.status(200).json({ data: user, message: 'Successfully logged in' });
     } catch (err) {
         
@@ -61,3 +63,17 @@ exports.loginPage = async (req, res) => {
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+exports.getAllUser = async (req, res) => {
+    try {
+     
+      const filterUser = await User.find().select("-password");
+      console.log(filterUser);
+      res.status(200).json(filterUser);
+    } catch (error) {
+      console.log(error);
+      if (!res.headersSent) {
+        res.status(500).json("Internal server error in get user");
+      }
+    }
+  };

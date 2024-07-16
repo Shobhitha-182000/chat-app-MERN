@@ -3,7 +3,7 @@ const userChatController=require('../controllers/userChatController');
 
 const route=require('express').Router();
 
-route.get('/side',protectRoute,userChatController.getUserBySideBar)
+route.get('/side',protectRoute,userChatController.getUsersForSidebar)
 
 
 module.exports=route;

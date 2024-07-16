@@ -10,6 +10,7 @@ const generateTokenAndSetCookies = (userId, res) => {
             httpOnly: true,
             sameSite: 'strict'
         });
+        console.log("Token set in cookie:");
     } catch (err) {
         console.error('Error generating token and setting cookies', err);
     }

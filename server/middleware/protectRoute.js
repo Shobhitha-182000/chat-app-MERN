@@ -3,7 +3,9 @@ const User=require('../models/userModel.js');
 
 const protectRoute =async(req, res, next) => {
   try {
+    console.log("Cookies received:", req.cookies);  
     const token = req.cookies.jwt;
+    console.log("Token from cookies:", token);
     if (!token) {
       res.status(401).send({ error: " unautherized-not token provide" });
     }
